@@ -1,11 +1,11 @@
 
-import {useEffect,useState,UseState} from 'react'
+import {useEffect,useState} from 'react'
 import axios  from 'react'
 
 function Search(){
 
     const [term, setTerm] =useState('')
-    const [ result,setResult] = useState{[]}
+    const [ result,setResult] = useState([])
     
 
 
@@ -28,10 +28,26 @@ function Search(){
         
     },[term])
 
+
+
+const renderResults =result.map(result => {
+    return(
+        <div className='item'>
+            <div className='content'>
+            <div className='header'>{result.title}</div>
+            {result.snippet}
+            </div>
+        </div>
+    )
+})
+
  const inputChange=(e)=>{
      setTerm(e.target.value)
  }
 
+
+
+ 
 
     return(
         <div>
@@ -45,7 +61,7 @@ function Search(){
                 </div>
             </div>
 
-        <div></div>
+        <div className='ui celled list'>{renderResults}</div>
 
         </div>
     )
